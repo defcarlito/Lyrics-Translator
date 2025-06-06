@@ -14,6 +14,7 @@ function Input({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWord
         })
         .then(result => result.json())
         .then(data => {
+            console.log(data)
             setReceivedData(data)
             setLoadingSongs(false)
         });
