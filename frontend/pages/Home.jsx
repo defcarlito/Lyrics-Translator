@@ -6,8 +6,10 @@ import { useState } from 'react'
 import '/pages/Home.css'
 
 function Home() {
-    const [receivedData, setReceivedData] = useState('')
     const [loadingSongs, setLoadingSongs] = useState(false)
+    const [loadingLyrics, setLoadingLyrics] = useState(false)
+
+    const [receivedData, setReceivedData] = useState('')
     const [lyricWords, setLyricWords] = useState([])
     const [clickedWords, setClickedWords] = useState([])
 
@@ -18,14 +20,19 @@ function Home() {
                  setReceivedData={setReceivedData}
                  setLoadingSongs={setLoadingSongs}
                  setLyricWords={setLyricWords}
-                 setClickedWords={setClickedWords} 
+                 setClickedWords={setClickedWords}
                 />
             </div>
             <div className="display-container">
-                <SongList 
-                receivedData={receivedData}
-                setLyricWords={setLyricWords} 
-                />
+                {loadingSongs ? (
+                    <p>Searching for your song...</p>    
+                ) : (
+                    <SongList 
+                    receivedData={receivedData}
+                    setLyricWords={setLyricWords} 
+                    setLoadingLyrics={setLoadingLyrics}
+                    />
+                )}
             </div>
             <div className='lyrics-clicked-container'>
                 <div>
@@ -33,13 +40,20 @@ function Home() {
                     words={lyricWords}
                     clickedWords={clickedWords}
                     setClickedWords={setClickedWords}
+                    loadingLyrics={loadingLyrics}
                     />
                 </div>
                 <div className='clicked-words-container'>
-                    {clickedWords.map((word, index) => (
-                        <ClickedWord word={word} index={index}/>
-                    ))}
-                    <button onClick={() => setClickedWords([])}>clear</button>
+                    {lyricWords.length === 0 ? (
+                        <></>
+                    ) : (
+                        <>
+                            {clickedWords.map((word, index) => (
+                            <ClickedWord word={word} index={index}/>
+                            ))}
+                            <button onClick={() => setClickedWords([])}>clear</button>
+                        </>
+                    )}   
                 </div>
             </div>
         </div>

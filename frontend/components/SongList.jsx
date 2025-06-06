@@ -1,6 +1,6 @@
 import SongDisplay from "./SongDisplay";
 
-function SongList({ receivedData, setLyricWords }) {
+function SongList({ receivedData, setLyricWords, setLoadingLyrics }) {
 
     if (receivedData.length === 1 && receivedData[0].found === false) {
         return <div>No songs found.</div> // receivedData = [{"found": false}]
@@ -23,7 +23,9 @@ function SongList({ receivedData, setLyricWords }) {
                     <SongDisplay 
                     key={index} 
                     receivedData={entry} 
-                    setLyricWords={setLyricWords} />
+                    setLyricWords={setLyricWords}
+                    setLoadingLyrics={setLoadingLyrics} 
+                    />
                 ))}
             </div>
         </>
