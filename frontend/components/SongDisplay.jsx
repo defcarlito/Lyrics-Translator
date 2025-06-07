@@ -1,3 +1,5 @@
+
+
 function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics }) {
 
     function choose() {
@@ -14,25 +16,19 @@ function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics }) {
         })
     }
 
-    return (
-        <div style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "1rem"
-
-        }}>
+    return (   
+        <div>
             <p>{receivedData.title + " by " + receivedData.artist}</p>
-            <img 
+            <img
             src={receivedData.cover_img_url}
             alt="album cover"
             style ={{
                 height: '150px',
                 width: '150px'
             }}
-              />
-            <button onClick={choose}>choose</button>
-        </div>
+            />
+            <button onClick={choose}>Choose</button>
+        </div> 
     )
 }
 

@@ -25,7 +25,7 @@ function Home() {
             </div>
             <div className="display-container">
                 {loadingSongs ? (
-                    <p>Searching for your song...</p>    
+                    <p>Searching for your song...</p>
                 ) : (
                     <SongList 
                     receivedData={receivedData}
@@ -57,6 +57,7 @@ function Home() {
                 </div>
             </div>
         </div>
+        
     )
 }
 

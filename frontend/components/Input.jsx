@@ -27,12 +27,12 @@ function Input({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWord
     }
 
     return (
-        <> 
-            <h1>Search for a song</h1>
-            <input onChange={event => setUserSearch(event.target.value)} />
-            <button onClick={search}>search</button>
-            <button onClick={clear}>clear</button>
-        </>
+        <div>
+            <h1 variant="h3">Choose a song</h1>
+            <input onChange={e => setUserSearch(e.target.value)}></input>
+            <button onClick={search}>Search</button>
+            <button onClick={clear}>Clear</button>
+        </div>
     )
 }
 
