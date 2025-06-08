@@ -1,4 +1,5 @@
 
+import { Box, VStack } from "@chakra-ui/react";
 import SongDisplay from "./SongDisplay";
 
 function SongList({ receivedData, setLyricWords, setLoadingLyrics }) {
@@ -11,14 +12,12 @@ function SongList({ receivedData, setLyricWords, setLoadingLyrics }) {
 
     return (
         <>
-            <div
-                style={{
-                    display: 'flex',
-                    gap: '5%',
-                    background: 'lightgrey',
-                    padding: '20px',
-                    borderRadius: '30px'
-                }}
+            <VStack 
+            spacing={5}
+            bg="gray.300"
+            p={8}
+            borderRadius="30px"
+            boxShadow="lg"
             >
                 {receivedData.map((entry, index) => (
                     <SongDisplay 
@@ -28,7 +27,7 @@ function SongList({ receivedData, setLyricWords, setLoadingLyrics }) {
                     setLoadingLyrics={setLoadingLyrics} 
                     />
                 ))}
-            </div>
+            </VStack>
         </>
     );
 }

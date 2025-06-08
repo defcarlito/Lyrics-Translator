@@ -1,6 +1,9 @@
+import { Input, HStack,  Box, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
+import { FiCornerDownLeft } from 'react-icons/fi'; // or any other icon you like
 
-function Input({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWords }) {
+function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWords }) {
     const [userSearch, setUserSearch] = useState('');
 
     function search() {
@@ -27,13 +30,38 @@ function Input({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWord
     }
 
     return (
-        <div>
-            <h1 variant="h3">Choose a song</h1>
-            <input onChange={e => setUserSearch(e.target.value)}></input>
-            <button onClick={search}>Search</button>
-            <button onClick={clear}>Clear</button>
-        </div>
+        <Box>
+            <form onSubmit={(e) => {
+                e.preventDefault()
+                search()
+            }}>
+                <HStack gap={10}>
+                    <InputGroup size="lg">
+                        <InputLeftElement h="70px">
+                            <SearchIcon></SearchIcon>
+                        </InputLeftElement>
+                        <Input 
+                        placeholder='Search for a song...'
+                        value={userSearch}
+                        onChange={e => setUserSearch(e.target.value)}
+                        borderRadius="full"
+                        h="70px"
+                        w="30vh"
+                        fontSize="x5"
+                        bg="gray.400"
+                        border="solid 1px"
+                        borderColor="gray.500"
+                        boxShadow="lg"
+                        focusBorderColor="gray.600"
+                        />
+                        <InputRightElement h="70px">
+                            <FiCornerDownLeft></FiCornerDownLeft>
+                        </InputRightElement>
+                    </InputGroup>
+                </HStack>
+            </form>
+        </Box>
     )
 }
 
-export default Input
+export default InputSection

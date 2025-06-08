@@ -1,9 +1,10 @@
 import SongList from '../components/SongList'
-import Input from '/components/Input.jsx'
+import InputSection from '/components/Input.jsx'
 import Lyrics from '/components/Lyrics.jsx'
 import ClickedWord from '/components/ClickedWord'
 import { useState } from 'react'
 import '/pages/Home.css'
+import { Box, Divider, Heading, HStack, VStack } from '@chakra-ui/react'
 
 function Home() {
     const [loadingSongs, setLoadingSongs] = useState(false)
@@ -14,49 +15,55 @@ function Home() {
     const [clickedWords, setClickedWords] = useState([])
 
     return (
-        <div>
-            <div className="input-container">
-                <Input
-                 setReceivedData={setReceivedData}
-                 setLoadingSongs={setLoadingSongs}
-                 setLyricWords={setLyricWords}
-                 setClickedWords={setClickedWords}
-                />
-            </div>
-            <div className="display-container">
-                {loadingSongs ? (
-                    <p>Searching for your song...</p>
-                ) : (
-                    <SongList 
-                    receivedData={receivedData}
-                    setLyricWords={setLyricWords} 
-                    setLoadingLyrics={setLoadingLyrics}
-                    />
-                )}
-            </div>
-            <div className='lyrics-clicked-container'>
-                <div>
-                    <Lyrics
-                    words={lyricWords}
-                    clickedWords={clickedWords}
+        <Box bg="gray.300" minH="100vh" w="100%" p={10}>
+            <VStack spacing={10}>
+                <Heading>Lyrics Translator</Heading>
+                <Box>
+                    <InputSection
+                    setReceivedData={setReceivedData}
+                    setLoadingSongs={setLoadingSongs}
+                    setLyricWords={setLyricWords}
                     setClickedWords={setClickedWords}
-                    loadingLyrics={loadingLyrics}
                     />
-                </div>
-                <div className='clicked-words-container'>
-                    {lyricWords.length === 0 ? (
-                        <></>
+                </Box>
+                <Box>
+                    {loadingSongs ? (
+                        <p>Searching for your song...</p>
                     ) : (
-                        <>
-                            {clickedWords.map((word, index) => (
-                            <ClickedWord word={word} index={index}/>
-                            ))}
-                            <button onClick={() => setClickedWords([])}>clear</button>
-                        </>
-                    )}   
-                </div>
-            </div>
-        </div>
+                        <SongList 
+                        receivedData={receivedData}
+                        setLyricWords={setLyricWords} 
+                        setLoadingLyrics={setLoadingLyrics}
+                        />
+                    )}
+                </Box>
+                <Divider my={4} borderColor="gray.400"/>
+                <Box>
+                    <HStack>
+                        <Box>
+                            <Lyrics
+                            words={lyricWords}
+                            clickedWords={clickedWords}
+                            setClickedWords={setClickedWords}
+                            loadingLyrics={loadingLyrics}
+                            />
+                        </Box>
+                        <Box>
+                            {lyricWords.length === 0 ? (
+                                <></>
+                            ) : (
+                                <>
+                                    {clickedWords.map((word, index) => (
+                                    <ClickedWord word={word} index={index}/>
+                                    ))}
+                                    <button onClick={() => setClickedWords([])}>clear</button>
+                                </>
+                            )}   
+                        </Box>
+                    </HStack>
+                </Box>
+            </VStack>
+        </Box>
         
     )
 }

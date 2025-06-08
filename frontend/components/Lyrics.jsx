@@ -4,7 +4,6 @@ function Lyrics({ words, clickedWords, setClickedWords, loadingLyrics }) {
 
     return (
         <>     
-            <h1>Lyrics</h1>
             {loadingLyrics ? (
                 <p>Getting the lyrics...</p>
             ) : ( 
