@@ -4,7 +4,7 @@ import Lyrics from '/components/Lyrics.jsx'
 import ClickedWord from '/components/ClickedWord'
 import { useState } from 'react'
 import '/pages/Home.css'
-import { Box, Divider, Heading, HStack, VStack } from '@chakra-ui/react'
+import { Box, Divider, Heading, HStack, VStack, Text, Flex } from '@chakra-ui/react'
 
 function Home() {
     const [loadingSongs, setLoadingSongs] = useState(false)
@@ -17,7 +17,11 @@ function Home() {
     return (
         <Box bg="gray.300" minH="100vh" w="100%" p={10}>
             <VStack spacing={10}>
-                <Heading>Lyrics Translator</Heading>
+                <Heading 
+                size="3xl"
+                >
+                    Lyrics Translator
+                </Heading>
                 <Box>
                     <InputSection
                     setReceivedData={setReceivedData}
@@ -28,7 +32,7 @@ function Home() {
                 </Box>
                 <Box>
                     {loadingSongs ? (
-                        <p>Searching for your song...</p>
+                        <Text>Searching for your song...</Text>
                     ) : (
                         <SongList 
                         receivedData={receivedData}
@@ -38,8 +42,9 @@ function Home() {
                     )}
                 </Box>
                 <Divider my={4} borderColor="gray.400"/>
-                <Box>
-                    <HStack>
+                <Flex className="lyrics-clickedwords" direction="column" gap={10}>
+                    <Heading >Lyrics</Heading>
+                    <HStack w="100%" justify="space-between" align="start" flex={1} gap={50}>
                         <Box>
                             <Lyrics
                             words={lyricWords}
@@ -61,7 +66,7 @@ function Home() {
                             )}   
                         </Box>
                     </HStack>
-                </Box>
+                </Flex>
             </VStack>
         </Box>
         

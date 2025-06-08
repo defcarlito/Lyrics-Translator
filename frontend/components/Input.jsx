@@ -1,27 +1,35 @@
 import { Input, HStack,  Box, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FiCornerDownLeft } from 'react-icons/fi'; // or any other icon you like
 
 function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWords }) {
     const [userSearch, setUserSearch] = useState('');
+    const [debouncedSearch, setDebouncedSearch] = useState('')
 
-    function search() {
-        if (!userSearch.trim()) return; // don't allow empty searches
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(userSearch.trim())
+        }, 400)
+        return () => clearTimeout(timer)
+    }, [userSearch])
+
+    useEffect(() =>  {
+        if (!debouncedSearch) return; // don't allow empty searches
         clear()
         setLoadingSongs(true);
         fetch('http://localhost:5000/api/fetch-song', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ input: userSearch })
+            body: JSON.stringify({ input: debouncedSearch })
         })
         .then(result => result.json())
         .then(data => {
             console.log(data)
             setReceivedData(data)
             setLoadingSongs(false)
-        });
-    }
+        })
+    }, [debouncedSearch])
 
     function clear() {
         setReceivedData([])
@@ -33,7 +41,7 @@ function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClic
         <Box>
             <form onSubmit={(e) => {
                 e.preventDefault()
-                search()
+                setDebouncedSearch(userSearch.trim())
             }}>
                 <HStack gap={10}>
                     <InputGroup size="lg">

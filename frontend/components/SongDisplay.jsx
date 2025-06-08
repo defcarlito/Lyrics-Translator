@@ -1,4 +1,4 @@
-import { Button, Heading, HStack, Image, Flex } from "@chakra-ui/react"
+import { Button, Heading, VStack, Image, Flex, Text, Box } from "@chakra-ui/react"
 
 
 function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics }) {
@@ -18,19 +18,38 @@ function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics }) {
     }
 
     return (   
-        <HStack spacing={4}>
-            <Flex direction="column">
-                <Heading size="md">{receivedData.title}</Heading>
-                <Heading size="sm">{receivedData.artist}</Heading>
+        <Box>
+            <Flex
+            direction="row" 
+            gap={5} 
+            bg="gray.300"
+            minWidth="100%"
+            p={5}
+            borderRadius="30px"
+            border="1.5px solid"
+            borderColor="gray.500"
+            onClick={choose}
+            _hover={{ bg: "gray.200", transform: "scale(1.01)" }}
+            transition="all 0.2s"
+            cursor="pointer"
+            >
                 <Image
                 src={receivedData.cover_img_url}
                 alt="album cover"
                 height="150px"
                 width="150px"
                 />
-                <Button onClick={choose}>Choose</Button>
+                <Flex 
+                direction="column" 
+                gap={3}
+                >
+                    <Heading size="md">{receivedData.title}</Heading>
+                    <Text size="sm">{receivedData.artist}</Text>
+                </Flex>
             </Flex>
-        </HStack>
+        </Box>
+        
+        
     )
 }
 
