@@ -1,8 +1,8 @@
 
-import { Box, VStack, Text, Flex } from "@chakra-ui/react";
+import { VStack, Text, Flex } from "@chakra-ui/react";
 import SongDisplay from "./SongDisplay";
 
-function SongList({ receivedData, setLyricWords, setLoadingLyrics }) {
+function SongList({ receivedData, setLyricWords, setLoadingLyrics, setSongSelected, setChosenSong }) {
 
     if (receivedData.length === 1 && receivedData[0].found === false) {
         return <div>No songs found.</div> // receivedData = [{"found": false}]
@@ -27,6 +27,8 @@ function SongList({ receivedData, setLyricWords, setLoadingLyrics }) {
                     receivedData={entry} 
                     setLyricWords={setLyricWords}
                     setLoadingLyrics={setLoadingLyrics} 
+                    setSongSelected={setSongSelected}
+                    setChosenSong={setChosenSong}
                     />
                 ))}
             </VStack>

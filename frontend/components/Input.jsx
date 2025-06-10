@@ -3,12 +3,13 @@ import { SearchIcon } from '@chakra-ui/icons'
 import { useState, useEffect } from 'react'
 import { FiCornerDownLeft } from 'react-icons/fi'; // or any other icon you like
 
-function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWords }) {
+function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWords, setSongSelected }) {
     const [userSearch, setUserSearch] = useState('');
     const [debouncedSearch, setDebouncedSearch] = useState('')
 
     useEffect(() => {
         const timer = setTimeout(() => {
+            setSongSelected(false)
             setDebouncedSearch(userSearch.trim())
         }, 400)
         return () => clearTimeout(timer)

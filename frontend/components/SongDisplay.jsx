@@ -1,10 +1,12 @@
 import { Button, Heading, VStack, Image, Flex, Text, Box } from "@chakra-ui/react"
 
 
-function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics }) {
+function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics, setSongSelected, setChosenSong }) {
 
     function choose() {
+        setSongSelected(true)
         setLoadingLyrics(true)
+        setChosenSong(receivedData)
         fetch('http://localhost:5000/api/fetch-lyrics', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
