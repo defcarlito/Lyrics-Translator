@@ -21,7 +21,7 @@ function LyricWord({ word, clickedWords, setClickedWords }) {
                 onMouseLeave={() => setHover(false)}
                 style={{
                     cursor: 'pointer',
-                    color: hover ? "blue" : "black"
+                    color: hover ? "white" : "black"
                 }}
                 >
                     {part}

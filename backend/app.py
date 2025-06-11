@@ -139,11 +139,9 @@ def translate(word_pt):
     # check cache
     doc = words_collection.document(word_pt).get()
     if doc.exists:
-        print("cache hit")
         return doc.to_dict()
 
-    # not in cache
-    print("not in cache... making request")
+    # not in cache, ask model
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
@@ -155,7 +153,7 @@ def translate(word_pt):
 
     # save to firestore
     words_collection.document(word_pt).set(word_data)
-    print("added")
+    
     return word_data
 
 @app.route('/api/get-translation', methods=['POST'])
@@ -164,8 +162,9 @@ def get_translation():
     ### translate word
     # ...
     word_info = translate(word)
-    translation = word_info["meanings"][0]["english"]
-    return jsonify(translation=translation)
+    print(word_info)
+    # translation = word_info["meanings"][0]["english"]
+    return jsonify(word_info)
 
 
 if __name__ == '__main__':
