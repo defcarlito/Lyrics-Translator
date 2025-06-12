@@ -1,4 +1,4 @@
-import { Button, Heading, VStack, Image, Flex, Text, Box } from "@chakra-ui/react"
+import { Heading, Image, Flex, Text, Box } from "@chakra-ui/react"
 
 
 function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics, setSongSelected, setChosenSong }) {
@@ -20,13 +20,13 @@ function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics, setSongSel
     }
 
     return (   
-        <Box>
+        <Box w="100%">
             <Flex
-            direction="row" 
+            w="100%"
+            direction="row"
             gap={5} 
             bg="gray.300"
-            minWidth="100%"
-            p={5}
+            p={6}
             borderRadius="30px"
             border="1.5px solid"
             borderColor="gray.500"
@@ -38,14 +38,14 @@ function SongDisplay({ receivedData, setLyricWords, setLoadingLyrics, setSongSel
                 <Image
                 src={receivedData.cover_img_url}
                 alt="album cover"
-                height="150px"
-                width="150px"
+                height={["100px", "150px"]}
+                width={["100px", "150px"]}
                 />
                 <Flex 
                 direction="column" 
                 gap={3}
                 >
-                    <Heading size="md">{receivedData.title}</Heading>
+                    <Heading size={["sm", "md"]}>{receivedData.title}</Heading>
                     <Text size="sm">{receivedData.artist}</Text>
                 </Flex>
             </Flex>

@@ -11,19 +11,19 @@ function SongList({ receivedData, setLyricWords, setLoadingLyrics, setSongSelect
     if (receivedData.length === 0) return null; // Hides styles if search is empty
 
     return (
-        <Flex direction="column" alignItems="center" gap={3}>
+        <Flex direction="column" alignItems="center" gap={3} w="100%">
             <VStack 
             spacing={5}
             bg="gray.400"
-            p={12}
+            p={[6, 12]}
             borderRadius="30px"
             boxShadow="lg"
-            align
-            minWidth="700px"
+            align="stretch"
+            w="100%"
+            maxW="700px"
             >
-                {receivedData.map((entry, index) => (
+                {receivedData.map((entry) => (
                     <SongDisplay 
-                    key={index} 
                     receivedData={entry} 
                     setLyricWords={setLyricWords}
                     setLoadingLyrics={setLoadingLyrics} 
@@ -32,7 +32,7 @@ function SongList({ receivedData, setLyricWords, setLoadingLyrics, setSongSelect
                     />
                 ))}
             </VStack>
-            <Text color="gray.400">Click on a song to get its lyrics</Text>
+            <Text color="gray.600">Click on a song to get its lyrics</Text>
         </Flex>
     );
 }

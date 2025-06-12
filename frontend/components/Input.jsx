@@ -3,7 +3,7 @@ import { SearchIcon } from '@chakra-ui/icons'
 import { useState, useEffect } from 'react'
 import { FiCornerDownLeft } from 'react-icons/fi'; // or any other icon you like
 
-function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWords, setSongSelected }) {
+function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClickedWords, setSongSelected, setShowTutorial }) {
     const [userSearch, setUserSearch] = useState('');
     const [debouncedSearch, setDebouncedSearch] = useState('')
 
@@ -14,9 +14,14 @@ function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClic
         }, 400)
         return () => clearTimeout(timer)
     }, [userSearch])
-
+    
     useEffect(() =>  {
-        if (!debouncedSearch) return; // don't allow empty searches
+        if (!debouncedSearch) { // don't allow empty searches
+            clear()
+            setShowTutorial(true)
+            return
+        } 
+        setShowTutorial(false)
         clear()
         setLoadingSongs(true);
         fetch('http://localhost:5000/api/fetch-song', {
@@ -36,6 +41,7 @@ function InputSection({ setReceivedData, setLoadingSongs, setLyricWords, setClic
         setReceivedData([])
         setLyricWords([])
         setClickedWords([])
+        setSongSelected(false)
     }
 
     return (

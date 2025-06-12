@@ -1,4 +1,4 @@
-import { Heading, VStack, Box } from "@chakra-ui/react";
+import { Heading, VStack, Box, Flex, Text } from "@chakra-ui/react";
 
 import LyricWord from "./LyricWord";
 
@@ -7,9 +7,12 @@ function Lyrics({ words, clickedWords, setClickedWords, loadingLyrics }) {
     return (
         <>     
             {loadingLyrics ? (
-                <p>Getting the lyrics...</p>
+                <Flex h="300px" w="100%" align="center" justify="center">
+                    <Spinner color="grey.300" size="lg"/>
+                    <Text fontSize="l">Getting the lyrics...</Text>
+                </Flex>
             ) : ( 
-                <VStack spacing={10}>
+                <VStack spacing={6}>
                     <Heading>Lyrics</Heading>
                     <Box
                     bg="gray.400"
