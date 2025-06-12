@@ -11,6 +11,7 @@ dist
 dist-ssr
 *.local
 
+.env
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -20,4 +21,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-# 
+backend/firebase-key.json
